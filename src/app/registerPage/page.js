@@ -1,37 +1,51 @@
 "use client";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { ImCross } from "react-icons/im";
-import { signIn } from "next-auth/react";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
 
-    await signIn("credentials", {
-      email,
-      password,
-      callbackUrl: "/",
-    });
+    try {
+      const user = { id: Date.now(), name, email, password };
+      console.log("Registered user", user);
+
+      await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/",
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="flex justify-center h-screen items-center bg-gradient-to-br from-[#013f69] to-[#000]">
-      <div className="max-w-lg bg-secondary p-6 rounded shadow-md">
-        <form onSubmit={handleSubmit} className=" space-y-4 ">
+      <div className="p-6 rounded shadow-md  max-w-lg bg-secondary">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex justify-end">
             <Link href="/">
               {" "}
               <ImCross className="text-white" />
             </Link>
           </div>
-          <h2 className=" text-center text-white">Login Your Account</h2>
+          <h2 className=" text-center text-white">Register Your Account</h2>
 
           <input
-            name="email"
+            name="name"
             type="text"
+            placeholder="Your Name"
+            className="border border-white p-2 w-full rounded-sm bg-white"
+          />
+          <input
+            name="email"
+            type="email"
             placeholder="Email"
             className="border border-white p-2 w-full rounded-sm bg-white"
           />
@@ -47,13 +61,14 @@ const LoginPage = () => {
             type="submit"
             className="bg-primary rounded-sm text-white px-4 py-2 w-full cursor-pointer"
           >
-            Login
+            Register
           </button>
         </form>
+
         <p className="text-white mt-4">
-          Do not have an account? please{" "}
-          <Link href="/registerPage" className="font-bold underline">
-            Register
+          Already have an account? please{" "}
+          <Link href="/loginPage" className="font-bold underline">
+            Login
           </Link>
         </p>
       </div>
@@ -61,4 +76,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

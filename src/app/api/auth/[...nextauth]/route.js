@@ -14,7 +14,7 @@ const handler = NextAuth({
           placeholder: "Password",
         },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const user = {
           id: "1",
           name: "Abdullah",
