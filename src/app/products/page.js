@@ -108,7 +108,7 @@ const page = () => {
       <div className="pt-25 bg-gradient-to-br from-[#013f69] to-[#000] pb-20">
         <div className="max-w-[1500px] mx-auto px-4">
           <div className="w-full flex justify-center">
-            <h1 className="text-center  mb-10 text-white border-4 p-4 border-x-0 border-primary inline-block">
+            <h1 className="text-center  mb-10 text-white border-4 p-4 border-x-0 border-t-0  border-primary inline-block">
               All Products
             </h1>
           </div>

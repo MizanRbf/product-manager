@@ -1,13 +1,32 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const Navbar = () => {
+  const pathname = usePathname();
+
+  const linkClass = (href) =>
+    pathname === href
+      ? "text-primary font-bold border-b-2 border-primary pb-1"
+      : "text-white";
+
   return (
     <div className="flex justify-between items-center fixed top-0 right-0 left-0 px-4 py-3 bg-[#012130]">
       <h1 className="text-primary">ProductManager</h1>
-      <Link href="/products">
-        <p className="text-white">Products</p>
-      </Link>
+      <div className="flex gap-5">
+        <Link href="/">
+          <p className={linkClass("/")}>Home</p>
+        </Link>
+        <Link href="/products">
+          <p className={linkClass("/products")}>Products</p>
+        </Link>
+        <Link href="/products">
+          <p className={linkClass("/dashboard")}>Dashboard</p>
+        </Link>
+      </div>
+
+      {/* Login and Register */}
       <div className="flex gap-4">
         <Link href="/loginPage">
           <button className="button">Login</button>
