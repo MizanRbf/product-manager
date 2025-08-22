@@ -3,19 +3,40 @@ import Link from "next/link";
 import React from "react";
 import { ImCross } from "react-icons/im";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
 
-    await signIn("credentials", {
+    const result = await signIn("credentials", {
+      redirect: false,
       email,
       password,
-      callbackUrl: "/",
     });
+
+    if (result.error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: "Invalid email or password",
+        confirmButtonText: "OK",
+      });
+    } else {
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      router.push("/");
+    }
   };
   return (
     <div className="flex justify-center h-screen items-center bg-gradient-to-br from-[#013f69] to-[#000]">

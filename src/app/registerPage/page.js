@@ -1,8 +1,8 @@
 "use client";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { ImCross } from "react-icons/im";
+import { registerUser } from "../actions/auth/registerUser";
 
 const RegisterPage = () => {
   const handleSubmit = async (e) => {
@@ -11,19 +11,7 @@ const RegisterPage = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-
-    try {
-      const user = { id: Date.now(), name, email, password };
-      console.log("Registered user", user);
-
-      await signIn("credentials", {
-        email,
-        password,
-        callbackUrl: "/",
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    await registerUser({ name, email, password });
   };
   return (
     <div className="flex justify-center h-screen items-center bg-gradient-to-br from-[#013f69] to-[#000]">

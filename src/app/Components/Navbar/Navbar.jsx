@@ -6,7 +6,7 @@ import React from "react";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const session = useSession();
+  const { data: session, status } = useSession();
 
   const linkClass = (href) =>
     pathname === href

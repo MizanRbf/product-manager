@@ -1,3 +1,4 @@
+import { loginUser } from "@/app/actions/auth/loginUser";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -15,17 +16,10 @@ const handler = NextAuth({
         },
       },
       async authorize(credentials) {
-        const user = {
-          id: "1",
-          name: "Abdullah",
-          email: "abdullah@example.com",
-        };
+        const user = await loginUser(credentials);
 
-        if (user) {
-          return user;
-        } else {
-          return null;
-        }
+        if (user) return user;
+        return null;
       },
     }),
   ],
