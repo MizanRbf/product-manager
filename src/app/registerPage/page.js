@@ -1,17 +1,41 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { registerUser } from "../actions/auth/registerUser";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    await registerUser({ name, email, password });
+    const result = await registerUser({ name, email, password });
+
+    if (result.success) {
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        text: "You can now login",
+        confirmButtonText: "OK",
+      }).then(() => {
+        setLoading(false);
+        router.push("/loginPage");
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: result.message || "Something went wrong",
+        confirmButtonText: "OK",
+      });
+    }
   };
   return (
     <div className="flex justify-center h-screen items-center bg-gradient-to-br from-[#013f69] to-[#000]">
@@ -49,7 +73,7 @@ const RegisterPage = () => {
             type="submit"
             className="bg-primary rounded-sm text-white px-4 py-2 w-full cursor-pointer"
           >
-            Register
+            {loading ? "Processing..." : "Register"}
           </button>
         </form>
 

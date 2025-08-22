@@ -24,5 +24,5 @@ export const registerUser = async (payload) => {
     };
   }
 
-  return { success: false };
+  return { success: false, message: "User already exists" };
 };

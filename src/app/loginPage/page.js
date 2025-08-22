@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -9,8 +9,10 @@ import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
@@ -20,6 +22,8 @@ const LoginPage = () => {
       email,
       password,
     });
+
+    setLoading(false);
 
     if (result.error) {
       Swal.fire({
@@ -68,7 +72,7 @@ const LoginPage = () => {
             type="submit"
             className="bg-primary rounded-sm text-white px-4 py-2 w-full cursor-pointer"
           >
-            Login
+            {loading ? "Processing..." : "Login"}
           </button>
         </form>
         <p className="text-white mt-4">
