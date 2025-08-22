@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
           <p>{product.description}</p>
           <p>Price: $ {product.price}</p>
         </div>
-        <Link href={`/products/${product.id}`}>
+        <Link href={`/products/${product._id}`}>
           <button className="button w-full">See Details</button>
         </Link>
       </div>

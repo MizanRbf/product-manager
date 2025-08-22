@@ -1,11 +1,11 @@
 import React from "react";
-import { products } from "../page";
 import Navbar from "@/app/Components/Navbar/Navbar";
 import Footer from "@/app/Components/Footer/Footer";
+import dbConnect from "@/lib/dbConnect";
 
-export default function ProductDetails({ params }) {
-  const productId = parseInt(params.id);
-  const product = products.find((p) => p.id === productId);
+export default async function ProductDetails({ params }) {
+  const res = await dbConnect("productsCollection").find({}).toArray();
+  const product = res.find((p) => p._id.toString() === params.id);
 
   if (!product) {
     return <div className="text-red-500 p-6">❌ Product not found</div>;

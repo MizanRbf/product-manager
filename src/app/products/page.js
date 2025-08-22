@@ -4,9 +4,13 @@ import Footer from "../Components/Footer/Footer";
 import ProductCard from "../Components/ProductCard/ProductCard";
 import dbConnect from "@/lib/dbConnect";
 
-const page = async () => {
-  // const res = await fetch("/products.json");
+const Products = async () => {
   const products = await dbConnect("productsCollection").find({}).toArray();
+
+  const plainProducts = products.map((product) => ({
+    ...product,
+    _id: product._id.toString(),
+  }));
 
   return (
     <div>
@@ -19,8 +23,10 @@ const page = async () => {
             </h1>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product}></ProductCard>
+            {plainProducts.map((product) => (
+              <div key={product._id}>
+                <ProductCard product={product}></ProductCard>
+              </div>
             ))}
           </div>
         </div>
@@ -30,4 +36,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Products;
