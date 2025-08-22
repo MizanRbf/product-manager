@@ -25,7 +25,7 @@ const Navbar = () => {
             <p className={linkClass("/")}>Home</p>
           </Link>
           <Link href="/products">
-            <p className={linkClass("/products")}>Products</p>
+            <p className={linkClass("/products")}>Products List</p>
           </Link>
           <Link href="/products">
             <p className={linkClass("/dashboard")}>Dashboard</p>

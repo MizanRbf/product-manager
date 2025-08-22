@@ -27,11 +27,23 @@ const SmallDevice = ({ open, setOpen, signOut, session }) => {
             </Link>
           </li>
           <li>
+            <Link href="/products">
+              <button
+                className="w-full text-left cursor-pointer"
+                onClick={() => setOpen(false)}
+              >
+                Product List
+              </button>
+            </Link>
+          </li>
+          <li>
             <Link href="/dashboard">
               <button
                 className="w-full text-left cursor-pointer"
                 onClick={() => setOpen(false)}
-              ></button>
+              >
+                Dashboard
+              </button>
             </Link>
           </li>
         </ul>
@@ -46,7 +58,7 @@ const SmallDevice = ({ open, setOpen, signOut, session }) => {
               Logout
             </button>
           ) : (
-            <Link href="/products">
+            <Link href="/loginPage">
               <button
                 className="cursor-pointer py-2 mt-2 bg-white rounded-sm
                     text-primary shadow-2xl w-full"
