@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import Hero from "./Components/Hero/Hero";
+import TopProducts from "./Components/ProductHighlights/TopProducts";
 
 const HomePage = () => {
   return (
@@ -15,8 +16,9 @@ const HomePage = () => {
       </header>
 
       {/* Main */}
-      <main className="min-h-[calc(100vh-224px)] px-4 max-w-[1500px] mx-auto">
+      <main className=" px-4 max-w-[1500px] mx-auto">
         {/* Product Highlights */}
+        <TopProducts></TopProducts>
       </main>
 
       {/* Footer */}
