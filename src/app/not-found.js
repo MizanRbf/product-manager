@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Lottie from "lottie-react";
-import errorPage from "../../public/404 blue.json";
+import errorPage from "../../public/404 error.json";
 const notFound = () => {
   return (
     <div className="max-w-[700px] mx-auto mt-30">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Hero = () => {
@@ -10,12 +11,14 @@ const Hero = () => {
         </p>
         {/* Button */}
         <div className="space-x-4">
-          <button className="px-6 py-1 rounded-sm bg-white text-primary font-bold text-lg cursor-pointer">
+          <button className="px-6 py-1 rounded-sm bg-white text-primary font-bold text-lg cursor-pointer hover:bg-secondary hover:text-white">
             Get Started
           </button>
-          <button className="px-6 py-1 rounded-sm bg-white text-primary font-bold text-lg cursor-pointer">
-            Explore Products
-          </button>
+          <Link href="/products">
+            <button className="px-6 py-1 rounded-sm bg-white text-primary font-bold text-lg cursor-pointer hover:bg-secondary hover:text-white">
+              Explore Products
+            </button>
+          </Link>
         </div>
       </div>
     </div>
