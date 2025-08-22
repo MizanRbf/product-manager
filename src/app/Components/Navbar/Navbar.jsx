@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import React from "react";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const session = useSession();
 
   const linkClass = (href) =>
     pathname === href
@@ -28,12 +30,15 @@ const Navbar = () => {
 
       {/* Login and Register */}
       <div className="flex gap-4">
-        <Link href="/loginPage">
-          <button className="button">Login</button>
-        </Link>
-        <Link href="/registerPage">
-          <button className="button">Register</button>
-        </Link>
+        {session ? (
+          <button className="button" onClick={() => signOut()}>
+            Logout
+          </button>
+        ) : (
+          <Link href="/loginPage">
+            <button className="button">Login</button>
+          </Link>
+        )}
       </div>
     </div>
   );
